@@ -1,2 +1,896 @@
 # Google-Solution-Challenge
 Harvesting the Future: Al Solutions for Smallholder Farmers
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import 'farmar_model.dart';
+export 'farmar_model.dart';
+
+/// Absolutely!
+///
+/// I’ll guide you step-by-step, like your best teacher, to help you build the
+/// **HarvestAI** app from scratch. We’ll cover everything from planning to
+/// deployment, including tools, technologies, and processes. Let’s break it
+/// down into clear, actionable steps.
+///
+/// ---
+///
+/// ### **Step 1: Define the Scope and Features**
+/// Before coding, plan what you want to build. Based on your idea, here’s a
+/// simplified version of the app for the hackathon:
+///
+/// #### Core Features:
+/// 1. **Crop Recommendation**: Farmers input details (soil type, location,
+/// etc.), and the app suggests crops.
+/// 2. **Pest and Disease Detection**: Farmers upload images, and the app
+/// identifies issues.
+/// 3. **Market Insights**: Display real-time market prices and trends.
+/// 4. **Voice Assistant**: Multilingual support for farmers to ask questions.
+/// 5. **Weather Alerts**: Provide hyper-local weather forecasts.
+///
+/// #### Tools and Technologies:
+/// - **Frontend**: Flutter (cross-platform for iOS and Android).
+/// - **Backend**: Firebase (for authentication, database, and hosting).
+/// - **AI/ML**: Gemini API (for image recognition and text generation).
+/// - **APIs**: Weather API (e.g., OpenWeatherMap), Market Data API (e.g.,
+/// AgriMart).
+/// - **Version Control**: Git and GitHub.
+///
+/// ---
+///
+/// ### **Step 2: Set Up Your Development Environment**
+/// 1. **Install Flutter**:
+///    - Download and install Flutter from [flutter.dev](https://flutter.dev).
+///    - Set up Android Studio or VS Code as your IDE.
+///    - Install the Flutter and Dart plugins in your IDE.
+///
+/// 2. **Install Firebase Tools**:
+///    - Create a Firebase project at
+/// [firebase.google.com](https://firebase.google.com).
+///    - Install the Firebase CLI and connect your app to Firebase.
+///
+/// 3. **Set Up Gemini API**:
+///    - Sign up for Google Cloud Platform (GCP) and enable the Gemini API.
+///    - Generate an API key for authentication.
+///
+/// 4. **Install Git**:
+///    - Download and install Git from [git-scm.com](https://git-scm.com).
+///    - Create a GitHub repository for your project.
+///
+/// ---
+///
+/// ### **Step 3: Design the User Interface (UI)**
+/// 1. **Sketch the App Flow**:
+///    - Draw wireframes for each screen (e.g., login, dashboard, crop
+/// recommendation, pest detection).
+///    - Use tools like Figma or Adobe XD for prototyping.
+///
+/// 2. **Create the UI in Flutter**:
+///    - Use Flutter widgets to build the app’s interface.
+///    - Example: A simple dashboard with buttons for each feature.
+///
+/// ```dart
+/// import 'package:flutter/material.dart';
+///
+/// void main() {
+///   runApp(MyApp());
+/// }
+///
+/// class MyApp extends StatelessWidget {
+///   @override
+///   Widget build(BuildContext context) {
+///     return MaterialApp(
+///       home: Scaffold(
+///         appBar: AppBar(title: Text('HarvestAI')),
+///         body: Center(
+///           child: Column(
+///             mainAxisAlignment: MainAxisAlignment.center,
+///             children: [
+///               ElevatedButton(
+///                 onPressed: () {
+///                   // Navigate to Crop Recommendation
+///                 },
+///                 child: Text('Crop Recommendation'),
+///               ),
+///               ElevatedButton(
+///                 onPressed: () {
+///                   // Navigate to Pest Detection
+///                 },
+///                 child: Text('Pest Detection'),
+///               ),
+///             ],
+///           ),
+///         ),
+///       ),
+///     );
+///   }
+/// }
+/// ```
+///
+/// ---
+///
+/// ### **Step 4: Build the Backend with Firebase**
+/// 1. **Set Up Firebase Authentication**:
+///    - Enable email/password or phone authentication in Firebase.
+///    - Integrate Firebase Auth in your Flutter app.
+///
+/// 2. **Set Up Firestore Database**:
+///    - Use Firestore to store user data, crop recommendations, and pest
+/// detection results.
+///
+/// 3. **Integrate Firebase in Flutter**:
+///    - Add Firebase dependencies to your `pubspec.yaml` file.
+///    - Initialize Firebase in your app.
+///
+/// ```yaml
+/// dependencies:
+///   flutter:
+///     sdk: flutter
+///   firebase_core: latest_version
+///   firebase_auth: latest_version
+///   cloud_firestore: latest_version
+/// ```
+///
+/// ---
+///
+/// ### **Step 5: Integrate Gemini API**
+/// 1. **Set Up API Calls**:
+///    - Use the `http` package in Flutter to send requests to the Gemini API.
+///    - Example: Send an image for pest detection.
+///
+/// ```dart
+/// import 'package:http/http.dart' as http;
+/// import 'dart:convert';
+///
+/// Future<String> analyzeImage(String imageUrl) async {
+///   final response = await http.post(
+///     Uri.parse('https://api.gemini.com/v1/analyze'),
+///     headers: {'Authorization': 'Bearer YOUR_API_KEY'},
+///     body: jsonEncode({'image_url': imageUrl}),
+///   );
+///
+///   if (response.statusCode == 200) {
+///     return jsonDecode(response.body)['result'];
+///   } else {
+///     throw Exception('Failed to analyze image');
+///   }
+/// }
+/// ```
+///
+/// 2. **Display Results**:
+///    - Show the analysis results (e.g., pest name, treatment suggestions) in
+/// the app.
+///
+/// ---
+///
+/// ### **Step 6: Add Additional Features**
+/// 1. **Weather Alerts**:
+///    - Use OpenWeatherMap API to fetch weather data.
+///    - Display alerts for extreme weather conditions.
+///
+/// 2. **Market Insights**:
+///    - Use an agriculture market API to fetch price trends.
+///    - Display prices in a simple chart or table.
+///
+/// 3. **Voice Assistant**:
+///    - Use a text-to-speech library like `flutter_tts` for multilingual
+/// support.
+///
+/// ---
+///
+/// ### **Step 7: Test the App**
+/// 1. **Test on Emulators**:
+///    - Use Android Studio or Xcode to test the app on virtual devices.
+/// 2. **Test on Real Devices**:
+///    - Install the app on your phone to check performance and usability.
+/// 3. **Fix Bugs**:
+///    - Debug issues and optimize the app for smooth performance.
+///
+/// ---
+///
+/// ### **Step 8: Prepare for Deployment**
+/// 1. **Build the App**:
+///    - Generate APK (Android) and IPA (iOS) files.
+///    - Use `flutter build apk` and `flutter build ios`.
+///
+/// 2. **Deploy to App Stores**:
+///    - Create developer accounts on Google Play and Apple App Store.
+///    - Upload your app and submit it for review.
+///
+/// 3. **Share the App**:
+///    - Share the APK file or TestFlight link with hackathon judges.
+///
+/// ---
+///
+/// ### **Step 9: Present Your App**
+/// 1. **Create a Pitch Deck**:
+///    - Explain the problem, solution, and impact of your app.
+/// 2. **Demo the App**:
+///    - Showcase the app’s features in a live demo.
+/// 3. **Highlight Innovation**:
+///    - Emphasize the use of Gemini API and AI/ML.
+///
+/// ---
+///
+/// ### **Tools and Resources**:
+/// - **Flutter Documentation**: [flutter.dev/docs](https://flutter.dev/docs)
+/// - **Firebase Documentation**:
+/// [firebase.google.com/docs](https://firebase.google.com/docs)
+/// - **Gemini API Documentation**: [Google Cloud
+/// Console](https://cloud.google.com)
+/// - **OpenWeatherMap API**:
+/// [openweathermap.org/api](https://openweathermap.org/api)
+/// - **GitHub Repository**: [github.com](https://github.com)
+///
+/// ---
+///
+/// ### **Timeline**:
+/// - **Day 1-2**: Set up the environment and design the UI.
+/// - **Day 3-4**: Build the backend and integrate Firebase.
+/// - **Day 5-6**: Integrate Gemini API and add features.
+/// - **Day 7**: Test, debug, and prepare for deployment.
+///
+/// ---
+///
+/// If you get stuck at any step, feel free to ask for help. You’ve got this!
+/// Let’s build something amazing for farmers and win that hackathon! 🌟🚀
+class FarmarWidget extends StatefulWidget {
+  const FarmarWidget({super.key});
+
+  static String routeName = 'farmar';
+  static String routePath = '/farmar';
+
+  @override
+  State<FarmarWidget> createState() => _FarmarWidgetState();
+}
+
+class _FarmarWidgetState extends State<FarmarWidget> {
+  late FarmarModel _model;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => FarmarModel());
+  }
+
+  @override
+  void dispose() {
+    _model.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        key: scaffoldKey,
+        backgroundColor: Color(0xFFFBF9F5),
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: () {
+            print('FloatingActionButton pressed ...');
+          },
+          backgroundColor: Color(0xFF507583),
+          elevation: 4,
+          label: Icon(
+            Icons.chat,
+            color: Colors.white,
+            size: 24,
+          ),
+        ),
+        appBar: AppBar(
+          backgroundColor: Color(0xFF507583),
+          automaticallyImplyLeading: false,
+          title: Text(
+            'HarvestAI',
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  fontFamily: 'Readex Pro',
+                  color: Colors.white,
+                  fontSize: 28,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          actions: [
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+              child: FlutterFlowIconButton(
+                borderRadius: 40,
+                buttonSize: 40,
+                icon: Icon(
+                  Icons.notifications_none,
+                  color: Colors.white,
+                  size: 24,
+                ),
+                onPressed: () {
+                  print('IconButton pressed ...');
+                },
+              ),
+            ),
+          ],
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Container(
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: Image.network(
+                    '800x800?farm',
+                  ).image,
+                ),
+                gradient: LinearGradient(
+                  colors: [Color(0x80000000), Color(0x80000000)],
+                  stops: [0, 1],
+                  begin: AlignmentDirectional(0, -1),
+                  end: AlignmentDirectional(0, 1),
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome, Farmer',
+                      style:
+                          FlutterFlowTheme.of(context).headlineLarge.override(
+                                fontFamily: 'Readex Pro',
+                                color: Colors.white,
+                                fontSize: 32,
+                                letterSpacing: 0.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                      child: Text(
+                        'Let\'s grow smarter together',
+                        style: FlutterFlowTheme.of(context).bodyLarge.override(
+                              fontFamily: 'Inter',
+                              color: Colors.white,
+                              fontSize: 16,
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16, 16, 16, 16),
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 16),
+                        child: Text(
+                          'What can we help you with?',
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Inter',
+                                    color: Color(0xFF101518),
+                                    fontSize: 22,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                        ),
+                      ),
+                      GridView(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 0.85,
+                        ),
+                        primary: false,
+                        shrinkWrap: true,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x1A000000),
+                                  offset: Offset(
+                                    0,
+                                    2,
+                                  ),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.eco,
+                                    color: Color(0xFF507583),
+                                    size: 48,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 8),
+                                    child: Text(
+                                      'Crop Recommendation',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Get personalized crop suggestions',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 12,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x1A000000),
+                                  offset: Offset(
+                                    0,
+                                    2,
+                                  ),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.bug_report,
+                                    color: Color(0xFF928163),
+                                    size: 48,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 8),
+                                    child: Text(
+                                      'Pest & Disease Detection',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Identify issues with AI analysis',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 12,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x1A000000),
+                                  offset: Offset(
+                                    0,
+                                    2,
+                                  ),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.trending_up,
+                                    color: Color(0xFF16857B),
+                                    size: 48,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 8),
+                                    child: Text(
+                                      'Market Insights',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Track prices and market trends',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 12,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurRadius: 4,
+                                  color: Color(0x1A000000),
+                                  offset: Offset(
+                                    0,
+                                    2,
+                                  ),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.wb_sunny,
+                                    color: Color(0xFFF3C344),
+                                    size: 48,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 12, 0, 8),
+                                    child: Text(
+                                      'Weather Alerts',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Get local weather forecasts',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodySmall
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          color: Color(0xFF57636C),
+                                          fontSize: 12,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(8, 16, 8, 0),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xFF507583), Color(0x884B39EF)],
+                              stops: [0, 1],
+                              begin: AlignmentDirectional(1, -1),
+                              end: AlignmentDirectional(-1, 1),
+                            ),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  child: Icon(
+                                    Icons.mic,
+                                    color: Colors.white,
+                                    size: 36,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Voice Assistant',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                      ),
+                                      Text(
+                                        'Ask questions in your language',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                FlutterFlowIconButton(
+                                  borderRadius: 20,
+                                  buttonSize: 40,
+                                  fillColor: Colors.white,
+                                  icon: Icon(
+                                    Icons.arrow_forward,
+                                    color: Color(0xFF507583),
+                                    size: 24,
+                                  ),
+                                  onPressed: () {
+                                    print('IconButton pressed ...');
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(8, 24, 8, 16),
+                        child: Text(
+                          'Today\'s Highlights',
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Inter',
+                                    color: Color(0xFF101518),
+                                    fontSize: 22,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x1A000000),
+                                offset: Offset(
+                                  0,
+                                  2,
+                                ),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(12),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  child: Icon(
+                                    Icons.wb_sunny,
+                                    color: Color(0xFFF3C344),
+                                    size: 24,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Weather Forecast',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 4, 0, 0),
+                                        child: Text(
+                                          'Sunny, 28°C with light winds',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color: Color(0xFF101518),
+                                                fontSize: 14,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 4,
+                                color: Color(0x1A000000),
+                                offset: Offset(
+                                  0,
+                                  2,
+                                ),
+                              )
+                            ],
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(12),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 16, 0),
+                                  child: Icon(
+                                    Icons.trending_up,
+                                    color: Color(0xFF16857B),
+                                    size: 24,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Text(
+                                        'Market Prices',
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color: Colors.white,
+                                              fontSize: 18,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 4, 0, 0),
+                                        child: Text(
+                                          'Wheat: ₹2,100/quintal (↑5%)',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                color: Color(0xFF101518),
+                                                fontSize: 14,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
